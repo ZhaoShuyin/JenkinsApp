@@ -12,12 +12,6 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
-        debug{
-            keyAlias 'abc'
-            keyPassword '123456'
-            storeFile file('../keystore/jenkins.jks')
-            storePassword '123456'
-        }
         release {
             keyAlias 'abc'
             keyPassword '123456'
@@ -26,9 +20,15 @@ android {
         }
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
